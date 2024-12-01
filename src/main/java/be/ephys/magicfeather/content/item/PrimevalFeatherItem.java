@@ -6,23 +6,20 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.extensions.IForgeItem;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.fml.LogicalSide;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.WeakHashMap;
 
@@ -37,8 +34,8 @@ public class PrimevalFeatherItem extends AbstractFeatherItem {
     }
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
 
         Player player = Minecraft.getInstance().player;
         if (player != null) {
@@ -56,12 +53,12 @@ public class PrimevalFeatherItem extends AbstractFeatherItem {
         }
     }
 
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side != LogicalSide.SERVER) {
+    public static void onPlayerTick(PlayerTickEvent.Pre event) {
+        if(event.getEntity().level().isClientSide()) {
             return;
         }
 
-        Player player = event.player;
+        Player player = event.getEntity();
 
         PrimevalFeatherData data = GLOBAL_PLAYER_DATA.get(player);
         // if the player instance changes, we have to rebuild this.
@@ -104,9 +101,12 @@ public class PrimevalFeatherItem extends AbstractFeatherItem {
                         featherItemStack = stack;
                     }
                 }
+                //TODO: This may not be the correct way to damage the item
                 if (featherItemStack != null) {
                     featherItemStack.hurtAndBreak(1, player,
-                            (player) -> player.broadcastBreakEvent(player.getUsedItemHand()));
+                            player.getUsedItemHand() == InteractionHand.MAIN_HAND
+                                    ? EquipmentSlot.MAINHAND
+                                    : EquipmentSlot.OFFHAND);
                 }
             }
                 if (mayFly) {

@@ -6,18 +6,18 @@
     "GFG"
   ],
   "key": {
-    "E": {
+    "F": {
       "item": "minecraft:feather"
     },
-    "F": {
-      "item": "minecraft:diamond"
+    "E": {
+      "item": "minecraft:elytra"
     },
     "G": {
       "item": "minecraft:gold_ingot"
     }
   },
   "result": {
-    "item": "magicfeather:primeval_feather",
+    "id": "magicfeather:magic_feather",
     "count": 1
   }
 }

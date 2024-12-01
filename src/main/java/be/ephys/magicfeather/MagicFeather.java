@@ -1,22 +1,26 @@
 package be.ephys.magicfeather;
 
+import be.ephys.magicfeather.content.MFCreativeTabs;
+import be.ephys.magicfeather.content.MFItems;
 import be.ephys.magicfeather.content.util.BeaconRangeCalculator;
 import be.ephys.magicfeather.content.util.BeaconTypeHandler;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.InterModProcessEvent;
 
 @Mod(MagicFeather.MODID)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MagicFeather.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = MagicFeather.MODID)
 public class MagicFeather {
   public static final String MODID = "magicfeather";
 
-  @SubscribeEvent
-  public static void onConstructMod(final FMLConstructModEvent evt) {
-    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MFConfig.buildSpec());
+  public MagicFeather(IEventBus modEventBus, ModContainer modContainer) {
+    MFItems.ITEM_DEFERRED_REGISTER.register(modEventBus);
+    MFCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+    modContainer.registerConfig(ModConfig.Type.COMMON, MFConfig.buildSpec());
   }
 
   @SubscribeEvent

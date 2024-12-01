@@ -1,21 +1,13 @@
 package be.ephys.magicfeather.content.item;
 
 import be.ephys.magicfeather.MFConfig;
-import be.ephys.magicfeather.content.MFItems;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
-
-import java.util.WeakHashMap;
 
 public class AbstractFeatherItem extends Item {
   // TODO this should be a capability
@@ -34,11 +26,9 @@ public class AbstractFeatherItem extends Item {
   }
 
   public static void setMayFly(Player player, boolean mayFly) {
-
     if (player.getAbilities().mayfly == mayFly) {
       return;
     }
-
     player.getAbilities().mayfly = mayFly;
     player.onUpdateAbilities();
   }

@@ -42,9 +42,14 @@ public final class BeaconRangeCalculator {
         BeaconVerticalRangeType verticalRangeType = MFConfig.verticalRangeType.get();
 
         // vanilla creates a new block entity if one isn't found, this will be problematic here, so use the forge method that doesn't do that and just returns null
+        // not anymore in 1.21
         List<BlockEntity> tickingBlockEntities = ((LevelAccessor) world).getBlockEntityTickers().stream()
-                .filter(blockEntity -> !blockEntity.isRemoved() && blockEntity.getPos() != null)
-                .map(blockEntity -> world.getExistingBlockEntity(blockEntity.getPos()))
+                .filter(blockEntity -> {
+                    if (blockEntity.isRemoved()) return false;
+                    blockEntity.getPos();
+                    return true;
+                })
+                .map(blockEntity -> world.getBlockEntity(blockEntity.getPos()))
                 .filter(Objects::nonNull)
                 .toList();
 

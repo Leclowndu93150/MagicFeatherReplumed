@@ -1,21 +1,21 @@
 package be.ephys.magicfeather;
 
-import be.ephys.magicfeather.content.util.BeaconRangeCalculator;
 import be.ephys.magicfeather.content.item.MagicFeatherItem;
-import net.minecraftforge.common.ForgeConfigSpec;
+import be.ephys.magicfeather.content.util.BeaconRangeCalculator;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class MFConfig {
-    public static ForgeConfigSpec.EnumValue<BeaconRangeCalculator.BeaconVerticalRangeType> verticalRangeType;
-    public static ForgeConfigSpec.IntValue baseRange;
-    public static ForgeConfigSpec.IntValue rangeStep;
-    public static ForgeConfigSpec.BooleanValue looseRequiresCurios;
-    public static ForgeConfigSpec.EnumValue<MagicFeatherItem.FallStyle> fallStyle;
+    public static ModConfigSpec.EnumValue<BeaconRangeCalculator.BeaconVerticalRangeType> verticalRangeType;
+    public static ModConfigSpec.IntValue baseRange;
+    public static ModConfigSpec.IntValue rangeStep;
+    public static ModConfigSpec.BooleanValue looseRequiresCurios;
+    public static ModConfigSpec.EnumValue<MagicFeatherItem.FallStyle> fallStyle;
 
-    public static ForgeConfigSpec.IntValue primevalFeatherDurability;
+    public static ModConfigSpec.IntValue primevalFeatherDurability;
 
 
-    public static ForgeConfigSpec buildSpec() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+    public static ModConfigSpec buildSpec() {
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         verticalRangeType = builder.comment("How the beacon range is calculated vertically. JAVA = Vanilla Java Behavior. FULL_HEIGHT = expand vertical range to maximum")
                 .defineEnum("range_computation.vertical_range_type", BeaconRangeCalculator.BeaconVerticalRangeType.FULL_HEIGHT);
 
