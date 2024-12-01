@@ -127,7 +127,7 @@ public class ArcaneFeatherItem extends AbstractFeatherItem {
             abilities.mayfly = false;
             player.onUpdateAbilities();
 
-            boolean isPlayerOnGround = player.isOnGround() && player.fallDistance < 1F;
+            boolean isPlayerOnGround = player.onGround() && player.fallDistance < 1F;
             if (isPlayerOnGround) {
                 this.isSlowFalling = false;
             } else if (this.isSlowFalling) {
@@ -140,7 +140,7 @@ public class ArcaneFeatherItem extends AbstractFeatherItem {
         }
 
         private boolean negateFallDamage() {
-            boolean isPlayerOnGround = player.isOnGround() && player.fallDistance < 1F;
+            boolean isPlayerOnGround = player.onGround() && player.fallDistance < 1F;
 
             if (isPlayerOnGround) {
                 setMayFly(player, false);

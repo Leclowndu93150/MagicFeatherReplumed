@@ -36,7 +36,7 @@ public final class BeaconRangeCalculator {
     }
 
     public static boolean isInBeaconRange(Entity entity) {
-        Level world = entity.level;
+        Level world = entity.level();
         Vec3 entityPos = entity.position();
 
         BeaconVerticalRangeType verticalRangeType = MFConfig.verticalRangeType.get();

@@ -6,6 +6,7 @@ import be.ephys.magicfeather.content.item.MagicFeatherItem;
 import be.ephys.magicfeather.content.item.PrimevalFeatherItem;
 import be.ephys.magicfeather.content.item.StygianFeatherItem;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,13 +23,13 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MagicFeather.MODID)
 public class MFItems {
-  private static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(Registry.ITEM_REGISTRY, MagicFeather.MODID);
-  public static final RegistryObject<Item> MAGIC_FEATHER = ITEM_DEFERRED_REGISTER.register("magic_feather", () -> new MagicFeatherItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION)));
+  private static final DeferredRegister<Item> ITEM_DEFERRED_REGISTER = DeferredRegister.create(Registries.ITEM, MagicFeather.MODID);
+  public static final RegistryObject<Item> MAGIC_FEATHER = ITEM_DEFERRED_REGISTER.register("magic_feather", () -> new MagicFeatherItem(new Item.Properties().stacksTo(1)));
 
-  public static final RegistryObject<Item> ARCANE_FEATHER = ITEM_DEFERRED_REGISTER.register("arcane_feather", () -> new ArcaneFeatherItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION)));
+  public static final RegistryObject<Item> ARCANE_FEATHER = ITEM_DEFERRED_REGISTER.register("arcane_feather", () -> new ArcaneFeatherItem(new Item.Properties().stacksTo(1)));
 
-  public static final RegistryObject<Item> PRIMEVAL_FEATHER = ITEM_DEFERRED_REGISTER.register("primeval_feather", () -> new PrimevalFeatherItem());
-  public static final RegistryObject<Item> STYGIAN_FEATHER = ITEM_DEFERRED_REGISTER.register("stygian_feather", () -> new StygianFeatherItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION)));
+  public static final RegistryObject<Item> PRIMEVAL_FEATHER = ITEM_DEFERRED_REGISTER.register("primeval_feather", PrimevalFeatherItem::new);
+  public static final RegistryObject<Item> STYGIAN_FEATHER = ITEM_DEFERRED_REGISTER.register("stygian_feather", () -> new StygianFeatherItem(new Item.Properties().stacksTo(1)));
 
 
   @SubscribeEvent

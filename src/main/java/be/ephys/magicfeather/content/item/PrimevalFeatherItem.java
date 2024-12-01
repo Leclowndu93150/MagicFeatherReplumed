@@ -28,7 +28,7 @@ import java.util.WeakHashMap;
 
 public class PrimevalFeatherItem extends AbstractFeatherItem {
     public PrimevalFeatherItem() {
-        super(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION).durability(128));
+        super(new Item.Properties().stacksTo(1).durability(128)); //TODO: ADD to TAB
     }
     public static final WeakHashMap<Player, PrimevalFeatherData> GLOBAL_PLAYER_DATA = new WeakHashMap<>();
 
@@ -150,7 +150,7 @@ public class PrimevalFeatherItem extends AbstractFeatherItem {
             abilities.mayfly = false;
             player.onUpdateAbilities();
 
-            boolean isPlayerOnGround = player.isOnGround() && player.fallDistance < 1F;
+            boolean isPlayerOnGround = player.onGround() && player.fallDistance < 1F;
             if (isPlayerOnGround) {
                 this.isSlowFalling = false;
             } else if (this.isSlowFalling) {
@@ -163,7 +163,7 @@ public class PrimevalFeatherItem extends AbstractFeatherItem {
         }
 
         private boolean negateFallDamage() {
-            boolean isPlayerOnGround = player.isOnGround() && player.fallDistance < 1F;
+            boolean isPlayerOnGround = player.onGround() && player.fallDistance < 1F;
 
             if (isPlayerOnGround) {
                 setMayFly(player, false);
