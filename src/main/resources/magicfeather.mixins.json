@@ -5,8 +5,7 @@
   "package": "be.ephys.magicfeather.mixin",
   "refmap": "magicfeather.refmap.json",
   "mixins": [
-    "BeaconBlockEntityAccessor",
-    "LevelAccessor"
+    "BeaconBlockEntityAccessor"
   ],
   "client": [
   ],
